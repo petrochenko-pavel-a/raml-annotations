@@ -1,0 +1,13 @@
+#%RAML 1.0 Library
+usage: This library contains extra annotations for validation of type instances
+uses:
+  et: expression-types.raml
+annotationTypes:
+  disabledWhen: et.RAMLLocalExpression #
+  visibleWhen: et.RAMLLocalExpression  #
+  requiredWhen: et.RAMLLocalExpression
+  enumValues: et.RAMLLocalExpression
+  requiredWhenMessage: string
+  errorMessage: string
+  instanceValidator: et.RAMLLocalExpression
+  unique: boolean

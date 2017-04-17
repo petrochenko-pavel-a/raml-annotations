@@ -1,0 +1,61 @@
+#%RAML 1.0 Library
+uses:
+  et: expression-types.raml
+annotationTypes:
+  collectionFormat:
+    enum: [ csv, multi]
+   #
+  foreignProperties:
+    properties:
+      //: string
+  NilInstance: any
+  views:
+    properties:
+      //: ViewDescription
+  usesApis:
+    properties:
+      //: string
+  computeFunction: et.RAMLLocalExpression
+  computedProperties:
+    properties:
+       //: computePropertyType
+  actions:
+    properties:
+      //: Action
+  conversionRules:
+    properties:
+      //:
+        properties:
+          from: et.RAMLTypeName
+          to: et.RAMLTypeName
+          selfRule?: string
+          autoConvertKnownProperties?:
+            type: boolean
+            default: true
+          asssertions?:
+            properties:
+              //: string
+types:
+  Action:
+    type: Conditional
+    properties:
+      parameters?:
+        properties:
+          //: et.RAMLTypeName
+      result?: et.RAMLTypeName
+      body: string
+  computePropertyType: any
+  ViewDescription:
+    properties:
+       resource: string
+       method?: string
+       displayName?: string
+       description?: string
+       fixedParameters?:
+         properties:
+           //: any
+  Conditional:
+   properties:
+     disabledWhen?: et.RAMLLocalExpression
+     visibleWhen?: et.RAMLLocalExpression
+     requiredWhen?: et.RAMLLocalExpression

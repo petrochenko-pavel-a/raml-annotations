@@ -1,0 +1,42 @@
+#%RAML 1.0 Library
+uses:
+  et: expression-types.raml
+annotationTypes:
+  typeahead: et.RAMLLocalExpression
+  htmlLabel: boolean
+  label: et.RAMLLocalExpression
+  icon: string | et.RAMLLocalExpression
+  representation: string | any
+  enumDescriptions: string[]
+  labelDecorators:
+    properties:
+      //: DecoratorDescription
+  groupBy:
+    properties:
+        property?: string
+        allowUserConfiguration?: boolean
+        allowedGropings?: string[]
+  parametersLayout:
+    properties:
+       initiallyVisible?: string[]
+       allowConfiguration?: boolean
+       contributeToContextMenu?: boolean
+  columns:
+     type: array
+     items: string
+types:
+   DecoratorDescription:
+     properties:
+       when?: et.RAMLLocalExpression
+       title?: string
+       summary?: string
+       details?: string
+       status?: string
+       action? : string
+       itemTransform?: DecoratorDescription
+       replace?: boolean
+       align?:
+         enum: [ left, right ]
+       class?: string
+       background?: string
+       image?: string

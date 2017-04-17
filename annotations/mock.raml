@@ -1,0 +1,17 @@
+#%RAML 1.0 Library
+usage: This library contains set of annotations which might be used to decribe smarter mocking service
+annotationTypes:
+   templatedExample: nil
+   condition: string
+   setVariable:
+     properties:
+       target: string
+       expression: string
+   addValueToVariable:
+      properties:
+        target: string
+        expression: string
+   removeValueFromVariable:
+      properties:
+        target: string
+        expression: string

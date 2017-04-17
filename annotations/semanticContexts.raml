@@ -1,0 +1,69 @@
+#%RAML 1.0 Library
+usage: |
+  This library is built to allow declaration of semantic contexts, such as create,update,delete, read, it also supports
+  declaration of collections as well as describing of paging, sortering and filters
+uses:
+  et: expression-types.raml
+annotationTypes:
+  reference:
+    type: et.RAMLReferenceExpression
+  create: #
+    description: marks that this endpoint allows to create new instances of specified type. If type name is ommitted it assumes that type is defined by the body type
+    type:  et.RAMLTypeName| nil
+  delete:
+    description: allows to mark endpoint as endpoint which has semantic role delete
+    type:  et.RAMLTypeName| nil #
+  details: #
+    description: marks that this endpoint allows to get an additional details for specified type.
+    type: et.RAMLTypeName | nil
+  update: #
+    description: marks that this endpoint allows to update instances of specified type. If type name is ommitted it assumes that type is defined by the body type
+    type: et.RAMLTypeName| nil
+  list: #
+    description: marks that this endpoint allows to list instances of specified type.
+    type: et.RAMLTypeName | nil
+  action: #
+      description: marks that this endpoint contains an action related to specifed type.
+      type: et.RAMLTypeName | nil
+  memberProperty:
+    description: marks that this endpoint returns an object which is related to parent type
+    type: et.RAMLTypeName| nil
+  memberCollection: #
+    description: marks that this endpoint returns a collection of instances which is related to parent type
+    type: et.RAMLTypeName| nil
+  ordering: OrderingMappings
+  filter: FilterMapping |  nil
+  paging:
+    description: |
+       This annotation allows to specify how framework may use parameters of the method to page collection.
+    properties:
+       total?:
+         description: specifies where total length of collection is located in response
+         type: et.RAMLResponseExpression
+       page?:
+         description: Specifies where framework should pass number of the page to get.
+         type: et.RAMLRequestExpression
+       moreResults:
+         type: et.RAMLResponseExpression
+         description: specifies where framework should look in response to test if collection contains more results.
+       results?:
+         description: Specifies where content of collection is located in response
+         type: et.RAMLResponseExpression
+       offset?:
+         description: Specifies where framework should pass offset from the start of collection
+         type: et.RAMLRequestExpression
+types:
+  OrderingMapping:
+    properties:
+      property: string
+      descending?: boolean
+  OrderingMappings:
+    properties:
+      //: string | OrderingMapping
+  FilterMapping:
+    properties:
+      property?: string
+      valueMappings?:
+            properties:
+               //: string
+      noFilterValue?: string

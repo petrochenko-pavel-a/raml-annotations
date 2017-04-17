@@ -1,0 +1,31 @@
+#%RAML 1.0 Library
+usage: This library contains definitions of oftenly used value types, which are not built in into raml
+types:
+  url:
+    type: string
+    facets:
+      kind?: string
+  html: text
+  code:
+    type: text
+    facets:
+      language?: string
+  htmlUrl:
+    type: url
+    kind: html
+  link:
+    type: url
+    facets:
+      endpoint: string
+  imageUrl:
+    type: url
+    kind: image
+  multiline:
+    type: string
+  text: multiline
+  password: string
+  email: string
+  markdown:
+      type: text
+  relation:
+    type: array
