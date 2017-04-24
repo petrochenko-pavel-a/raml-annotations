@@ -1,10 +1,25 @@
 #%RAML 1.0 Library
 annotationTypes:
-    immutable: nil | boolean
-    readonly: nil | boolean
-    primary: nil| boolean #
-    parent: nil | boolean #
-    child: nil | boolean
-    key: boolean #
+    immutable:
+      description: marks target property or type as immutable (this means that its properties recursively should not be changed by the client)
+      type: nil | boolean
+      allowedTargets: TypeDeclaration
+    readonly:
+      type: nil | boolean
+      description: marks target property as readobly this means that value of the property should not be changed by the client
+      allowedTargets: TypeDeclaration
+    primary:
+      type: nil| boolean #
+      allowedTargets: TypeDeclaration
+    parent:
+      type: nil | boolean #
+      allowedTargets: TypeDeclaration
+    child:
+      type: nil | boolean
+      allowedTargets: TypeDeclaration
+    key:
+      type: boolean #
+      allowedTargets: TypeDeclaration
     propOrder:
       type: string[]
+      allowedTargets: TypeDeclaration

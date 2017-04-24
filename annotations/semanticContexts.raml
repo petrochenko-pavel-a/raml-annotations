@@ -6,6 +6,7 @@ uses:
   et: expression-types.raml
 annotationTypes:
   reference:
+    description: allows to mark parameter as a reference
     type: et.RAMLReferenceExpression
   create: #
     description: marks that this endpoint allows to create new instances of specified type. If type name is ommitted it assumes that type is defined by the body type
@@ -31,8 +32,12 @@ annotationTypes:
   memberCollection: #
     description: marks that this endpoint returns a collection of instances which is related to parent type
     type: et.RAMLTypeName| nil
-  ordering: OrderingMappings
-  filter: FilterMapping |  nil
+  ordering:
+    type: OrderingMappings
+    description: Allows to specify that annotated parameter is used to sort collection
+  filter:
+    description: Allows to specify that annotated parameter is used to filter collection
+    type: FilterMapping |  nil
   paging:
     description: |
        This annotation allows to specify how framework may use parameters of the method to page collection.
@@ -55,15 +60,23 @@ annotationTypes:
 types:
   OrderingMapping:
     properties:
-      property: string
+      property:
+        description: comma separated list of the properties which should be used to sort collection
+        type: string
       descending?: boolean
   OrderingMappings:
+    description: map from parameter value to the properties used to sort collection
     properties:
       //: string | OrderingMapping
   FilterMapping:
     properties:
-      property?: string
+      property?:
+        description: name of the type property being sorted
+        type: string
       valueMappings?:
+            description: allows to remap values, it is a map from parameter value to the expected property value
             properties:
                //: string
-      noFilterValue?: string
+      noFilterValue?:
+        description: value that may be passed to show that no filtering should be performed at all
+        type: string | boolean | number

@@ -2,30 +2,44 @@
 usage: This library contains definitions of oftenly used value types, which are not built in into raml
 types:
   url:
+    description: this type represents url, optional kind facet represents the nature of the resource under the link
     type: string
     facets:
       kind?: string
-  html: text
   code:
+    description: this type represents code in some artifical (for example programming) language
     type: text
     facets:
-      language?: string
+      language?:
+         type: string
+         description: language being used
   htmlUrl:
     type: url
     kind: html
+    description: link on the html page
   link:
     type: url
     facets:
       endpoint: string
   imageUrl:
+    description: url pointing to the image
     type: url
     kind: image
   multiline:
+    description: this type represents multiline text
     type: string
-  text: multiline
-  password: string
-  email: string
+  text:
+    type: multiline
+    description: this type is an alias for a multiline strings
+  html:
+    type: text
+    description: this type represents a html
+  password:
+    description: this type represents  password
+    type: string
+  email:
+    description: this type represents email
+    type: string
   markdown:
-      type: text
-  relation:
-    type: array
+    description: this type
+    type: text

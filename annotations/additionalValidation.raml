@@ -3,11 +3,35 @@ usage: This library contains extra annotations for validation of type instances
 uses:
   et: expression-types.raml
 annotationTypes:
-  disabledWhen: et.RAMLLocalExpression #
-  visibleWhen: et.RAMLLocalExpression  #
-  requiredWhen: et.RAMLLocalExpression
+  disabledWhen:
+    type: et.RAMLLocalExpression #
+    description: Allows to configure condition when annotated property can be specified
+    allowedTargets: TypeDeclaration
+  visibleWhen:
+    type: et.RAMLLocalExpression  #
+    description: Allows to configure condition when annotated property can be specified
+    allowedTargets: TypeDeclaration
+  requiredWhen:
+    type: et.RAMLLocalExpression
+    description: Allows to specify condition when annotated property is required
+    allowedTargets: TypeDeclaration
   enumValues: et.RAMLLocalExpression
-  requiredWhenMessage: string
-  errorMessage: string
-  instanceValidator: et.RAMLLocalExpression
-  unique: boolean
+  requiredWhenMessage:
+    type: string
+    description: Allows to configure error message when required when annotation validation fails.
+    allowedTargets: TypeDeclaration
+  errorMessage:
+    type: string
+    description:
+       Allows to configure a error message which should be used when validation fails,
+       expected to be used together with `instanceValidator` annotation
+    allowedTargets: TypeDeclaration
+  instanceValidator:
+    type: et.RAMLLocalExpression
+    description: Allows to configure additional validator expression on the type or on the property
+    example: x+y<7
+    allowedTargets: TypeDeclaration
+  unique:
+    type: boolean
+    description: Allows to mark that the value of the property should be used through all instances of the type
+    allowedTargets: TypeDeclaration

@@ -1,17 +1,53 @@
 #%RAML 1.0 Library
 usage: This library contains set of annotations which might be used to decribe smarter mocking service
+uses:
+  et: expression-types.raml
 annotationTypes:
    templatedExample: nil
-   condition: string
+   condition:
+    description: Named example can be returned if condition is evaluated to true
+    type: et.RAMLRequestExpression
+    allowedTargets: Example
    setVariable:
-     properties:
-       target: string
-       expression: string
+     description: allows to set global variable
+     type: VariableModify
+     example:
+       target: g
+       expression: body
    addValueToVariable:
-      properties:
-        target: string
-        expression: string
+     description: allows to add value to global variable
+     type: VariableModify
+     example:
+       target: g
+       expression: body
    removeValueFromVariable:
-      properties:
-        target: string
-        expression: string
+     type: VariableModify
+     description: allows to remove value from global variable
+     example:
+       target: g
+       expression: body
+   compositeOperation:
+     description: allows to perform several operations on global variables
+     type: VariableOp[]
+     example:
+       - target: g
+         expression: body
+         kind: set
+types:
+  VariableOp:
+    type: VariableModify
+    properties:
+      kind:
+        enum: [add, remove ,set]
+  VariableModify:
+    description:
+    properties:
+      target:
+        description: name of the variable to set
+        type: string
+      condition?:
+        description: optional condition which should be checked, if condition is evaluated to false, variable modification will be ignored
+        type: et.RAMLRequestExpression
+      expression:
+        description: expression to use in variable value
+        type: et.RAMLRequestExpression
